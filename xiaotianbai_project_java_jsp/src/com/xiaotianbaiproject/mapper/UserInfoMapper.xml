@@ -1,0 +1,48 @@
+﻿<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+   
+ -->
+<mapper namespace="com.xiaotianbaiproject.mapper.UserInfoMapper"> 
+<!-- 
+ 
+ -->
+	<!-- AddUserRecord -->
+	<insert id="addUserInfo" parameterType="userInfo">
+		insert into t_userInfo(user_name,password,name,gender,birthDate,userImage,telephone,city,address,email,paypalAccount,createTime) values 
+		(#{user_name},#{password},#{name},#{gender},#{birthDate},#{userImage},#{telephone},#{city},#{address},#{email},#{paypalAccount},#{createTime})
+	</insert>
+
+	<!--   SearchUserRecord -->
+	<select id="queryUserInfo" resultMap="userInfoMap" >
+		select t_userInfo.* from t_userInfo ${where} limit #{startIndex},#{pageSize}
+	</select>
+	<resultMap id="userInfoMap" type="userInfo">
+        <id property="user_name" column="user_name" />
+    </resultMap>
+
+    <!--   SearchAllUserRecord -->
+	<select id="queryUserInfoList" resultMap="userInfoMap" >
+		select t_userInfo.* from t_userInfo ${where}
+	</select>
+
+    <!--   的UserRecord -->
+	<select id="queryUserInfoCount" resultType="int">
+		select count(*) from t_userInfo ${where}
+	</select>
+
+	<!-- UseKeySearchSomeUserRecord -->
+	<select id="getUserInfo" parameterType="string" resultMap="userInfoMap">
+		select * from t_userInfo where t_userInfo.user_name = #{user_name}
+	</select>
+
+	<!-- UpdateUserRecord -->
+	<update id="updateUserInfo" parameterType="userInfo">
+		update t_userInfo set password=#{password},name=#{name},gender=#{gender},birthDate=#{birthDate},userImage=#{userImage},telephone=#{telephone},city=#{city},address=#{address},email=#{email},paypalAccount=#{paypalAccount},createTime=#{createTime} where user_name = #{user_name}
+	</update>
+
+	<!-- DeleteUserRecord -->
+	<delete id="deleteUserInfo" parameterType="string">
+		delete from t_userInfo where user_name=#{user_name}
+	</delete>
+
+</mapper>

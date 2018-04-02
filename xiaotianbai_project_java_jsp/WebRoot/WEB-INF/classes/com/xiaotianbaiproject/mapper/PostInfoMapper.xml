@@ -1,0 +1,49 @@
+﻿<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+   
+ -->
+<mapper namespace="com.xiaotianbaiproject.mapper.PostInfoMapper"> 
+<!-- 
+ 
+ -->
+	<!-- AddPostRecord -->
+	<insert id="addPostInfo" parameterType="postInfo">
+		insert into t_postInfo(pTitle,content,userObj,addTime,hitNum) values 
+		(#{pTitle},#{content},#{userObj.user_name},#{addTime},#{hitNum})
+	</insert>
+
+	<!--   SearchPostRecord -->
+	<select id="queryPostInfo" resultMap="postInfoMap" >
+		select t_postInfo.* from t_postInfo,t_userInfo ${where} and t_postInfo.userObj = t_userInfo.user_name limit #{startIndex},#{pageSize}
+	</select>
+	<resultMap id="postInfoMap" type="postInfo">
+        <id property="postInfoId" column="postInfoId" />
+        <association property="userObj" column="userObj" select="com.xiaotianbaiproject.mapper.UserInfoMapper.getUserInfo" />
+    </resultMap>
+
+    <!--   SearchAllPostRecord -->
+	<select id="queryPostInfoList" resultMap="postInfoMap" >
+		select t_postInfo.* from t_postInfo,t_userInfo ${where} and t_postInfo.userObj = t_userInfo.user_name
+	</select>
+
+    <!--   PostRecord -->
+	<select id="queryPostInfoCount" resultType="int">
+		select count(*) from t_postInfo,t_userInfo ${where} and t_postInfo.userObj = t_userInfo.user_name
+	</select>
+
+	<!-- UseKeySearchSomePostRecord -->
+	<select id="getPostInfo" parameterType="int" resultMap="postInfoMap">
+		select * from t_postInfo where t_postInfo.postInfoId = #{postInfoId}
+	</select>
+
+	<!-- UpdatePostRecord -->
+	<update id="updatePostInfo" parameterType="postInfo">
+		update t_postInfo set pTitle=#{pTitle},content=#{content},userObj=#{userObj.user_name},addTime=#{addTime},hitNum=#{hitNum} where postInfoId = #{postInfoId}
+	</update>
+
+	<!-- DeletePostRecord -->
+	<delete id="deletePostInfo" parameterType="int">
+		delete from t_postInfo where postInfoId=#{postInfoId}
+	</delete>
+
+</mapper>

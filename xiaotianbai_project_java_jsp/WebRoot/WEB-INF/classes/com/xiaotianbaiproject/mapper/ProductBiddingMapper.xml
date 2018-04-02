@@ -1,0 +1,50 @@
+﻿<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+   
+ -->
+<mapper namespace="com.xiaotianbaiproject.mapper.ProductBiddingMapper"> 
+<!-- 
+ 
+ -->
+	<!-- AddBiddingRecord -->
+	<insert id="addProductBidding" parameterType="productBidding">
+		insert into t_productBidding(itemObj,userObj,biddingTime,biddingPrice) values 
+		(#{itemObj.itemId},#{userObj.user_name},#{biddingTime},#{biddingPrice})
+	</insert>
+
+	<!--   SearchBiddingRecord -->
+	<select id="queryProductBidding" resultMap="productBiddingMap" >
+		select t_productBidding.* from t_productBidding,t_item,t_userInfo ${where} and t_productBidding.itemObj = t_item.itemId and t_productBidding.userObj = t_userInfo.user_name order by t_productBidding.biddingTime DESC limit #{startIndex},#{pageSize}
+	</select>
+	<resultMap id="productBiddingMap" type="productBidding">
+        <id property="biddingId" column="biddingId" />
+        <association property="itemObj" column="itemObj" select="com.xiaotianbaiproject.mapper.ItemMapper.getItem" />
+        <association property="userObj" column="userObj" select="com.xiaotianbaiproject.mapper.UserInfoMapper.getUserInfo" />
+    </resultMap>
+
+    <!--   SearchAllBiddingRecord -->
+	<select id="queryProductBiddingList" resultMap="productBiddingMap" >
+		select t_productBidding.* from t_productBidding,t_item,t_userInfo ${where} and t_productBidding.itemObj = t_item.itemId and t_productBidding.userObj = t_userInfo.user_name order by t_productBidding.biddingTime DESC 
+	</select>
+
+    <!--   的BiddingRecord -->
+	<select id="queryProductBiddingCount" resultType="int">
+		select count(*) from t_productBidding,t_item,t_userInfo ${where} and t_productBidding.itemObj = t_item.itemId and t_productBidding.userObj = t_userInfo.user_name
+	</select>
+
+	<!-- UseKeySearchSomeBiddingRecord -->
+	<select id="getProductBidding" parameterType="int" resultMap="productBiddingMap">
+		select * from t_productBidding where t_productBidding.biddingId = #{biddingId}
+	</select>
+
+	<!-- UpdateBiddingRecord -->
+	<update id="updateProductBidding" parameterType="productBidding">
+		update t_productBidding set itemObj=#{itemObj.itemId},userObj=#{userObj.user_name},biddingTime=#{biddingTime},biddingPrice=#{biddingPrice} where biddingId = #{biddingId}
+	</update>
+
+	<!-- DeleteBiddingRecord -->
+	<delete id="deleteProductBidding" parameterType="int">
+		delete from t_productBidding where biddingId=#{biddingId}
+	</delete>
+
+</mapper>

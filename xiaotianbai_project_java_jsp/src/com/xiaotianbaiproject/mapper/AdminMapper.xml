@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiaotianbaiproject.mapper.AdminMapper">  
+
+   <!-- SearchManageAcoount -->
+   <select id="findAdminByUserName" parameterType="String" resultType="Admin">
+      select * from admin where username=#{username}
+   </select>
+   
+   <update id="changePassword" parameterType="admin">
+      update admin set password=#{password} where username=#{username}
+   </update>
+ 
+</mapper>
+ 

@@ -1,0 +1,50 @@
+﻿<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+   
+ -->
+<mapper namespace="com.xiaotianbaiproject.mapper.ItemMapper"> 
+<!-- 
+ 
+ -->
+	<!-- AddItemRecord -->
+	<insert id="addItem" parameterType="item">
+		insert into t_item(itemClassObj,pTitle,itemPhoto,itemDesc,userObj,startPrice,startTime,endTime) values 
+		(#{itemClassObj.classId},#{pTitle},#{itemPhoto},#{itemDesc},#{userObj.user_name},#{startPrice},#{startTime},#{endTime})
+	</insert>
+
+	<!--   SearchItemRecord -->
+	<select id="queryItem" resultMap="itemMap" >
+		select t_item.* from t_item,t_itemClass,t_userInfo ${where} and t_item.itemClassObj = t_itemClass.classId and t_item.userObj = t_userInfo.user_name limit #{startIndex},#{pageSize}
+	</select>
+	<resultMap id="itemMap" type="item">
+        <id property="itemId" column="itemId" />
+        <association property="itemClassObj" column="itemClassObj" select="com.xiaotianbaiproject.mapper.ItemClassMapper.getItemClass" />
+        <association property="userObj" column="userObj" select="com.xiaotianbaiproject.mapper.UserInfoMapper.getUserInfo" />
+    </resultMap>
+
+    <!--   SearchAllItemRecord -->
+	<select id="queryItemList" resultMap="itemMap" >
+		select t_item.* from t_item,t_itemClass,t_userInfo ${where} and t_item.itemClassObj = t_itemClass.classId and t_item.userObj = t_userInfo.user_name
+	</select>
+
+    <!--   的ItemRecord -->
+	<select id="queryItemCount" resultType="int">
+		select count(*) from t_item,t_itemClass,t_userInfo ${where} and t_item.itemClassObj = t_itemClass.classId and t_item.userObj = t_userInfo.user_name
+	</select>
+
+	<!-- UseKeySearchSomeItemRecord -->
+	<select id="getItem" parameterType="int" resultMap="itemMap">
+		select * from t_item where t_item.itemId = #{itemId}
+	</select>
+
+	<!-- UpdateItemRecord -->
+	<update id="updateItem" parameterType="item">
+		update t_item set itemClassObj=#{itemClassObj.classId},pTitle=#{pTitle},itemPhoto=#{itemPhoto},itemDesc=#{itemDesc},userObj=#{userObj.user_name},startPrice=#{startPrice},startTime=#{startTime},endTime=#{endTime} where itemId = #{itemId}
+	</update>
+
+	<!-- DeleteItemRecord -->
+	<delete id="deleteItem" parameterType="int">
+		delete from t_item where itemId=#{itemId}
+	</delete>
+
+</mapper>

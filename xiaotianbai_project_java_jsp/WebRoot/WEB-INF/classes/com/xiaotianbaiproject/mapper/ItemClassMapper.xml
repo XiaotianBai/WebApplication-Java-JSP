@@ -1,0 +1,48 @@
+﻿<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+   
+ -->
+<mapper namespace="com.xiaotianbaiproject.mapper.ItemClassMapper"> 
+<!-- 
+ 
+ -->
+	<!-- AddItemClassRecord -->
+	<insert id="addItemClass" parameterType="itemClass">
+		insert into t_itemClass(className,classDesc) values 
+		(#{className},#{classDesc})
+	</insert>
+
+	<!--   SearchItemClassRecord -->
+	<select id="queryItemClass" resultMap="itemClassMap" >
+		select t_itemClass.* from t_itemClass ${where} limit #{startIndex},#{pageSize}
+	</select>
+	<resultMap id="itemClassMap" type="itemClass">
+        <id property="classId" column="classId" />
+    </resultMap>
+
+    <!--  SearchAllItemClassRecord -->
+	<select id="queryItemClassList" resultMap="itemClassMap" >
+		select t_itemClass.* from t_itemClass ${where}
+	</select>
+
+    <!--  AllItemClassRecord -->
+	<select id="queryItemClassCount" resultType="int">
+		select count(*) from t_itemClass ${where}
+	</select>
+
+	<!-- UseKeySearchSomeItemClassRecord -->
+	<select id="getItemClass" parameterType="int" resultMap="itemClassMap">
+		select * from t_itemClass where t_itemClass.classId = #{classId}
+	</select>
+
+	<!-- UpdateItemClassRecord -->
+	<update id="updateItemClass" parameterType="itemClass">
+		update t_itemClass set className=#{className},classDesc=#{classDesc} where classId = #{classId}
+	</update>
+
+	<!-- DeleteItemClassRecord -->
+	<delete id="deleteItemClass" parameterType="int">
+		delete from t_itemClass where classId=#{classId}
+	</delete>
+
+</mapper>

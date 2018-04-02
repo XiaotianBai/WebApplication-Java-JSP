@@ -1,0 +1,50 @@
+﻿<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+   
+ -->
+<mapper namespace="com.xiaotianbaiproject.mapper.UserFollowMapper"> 
+<!-- 
+ 
+ -->
+	<!-- AddUserFollowerRecord -->
+	<insert id="addUserFollow" parameterType="userFollow">
+		insert into t_userFollow(userObj1,userObj2,followTime) values 
+		(#{userObj1.user_name},#{userObj2.user_name},#{followTime})
+	</insert>
+
+	<!--   SearchUserFollowerRecord -->
+	<select id="queryUserFollow" resultMap="userFollowMap" >
+		select t_userFollow.* from t_userFollow ${where} limit #{startIndex},#{pageSize}
+	</select>
+	<resultMap id="userFollowMap" type="userFollow">
+        <id property="followId" column="followId" />
+        <association property="userObj1" column="userObj1" select="com.xiaotianbaiproject.mapper.UserInfoMapper.getUserInfo" />
+        <association property="userObj2" column="userObj2" select="com.xiaotianbaiproject.mapper.UserInfoMapper.getUserInfo" />
+    </resultMap>
+
+    <!--   SearchAllUserFollowerRecord -->
+	<select id="queryUserFollowList" resultMap="userFollowMap" >
+		select t_userFollow.* from t_userFollow,t_userInfo ${where}
+	</select>
+
+    <!--   的UserFollowerRecord -->
+	<select id="queryUserFollowCount" resultType="int">
+		select count(*) from t_userFollow ${where}
+	</select>
+
+	<!-- UseKeySearchSomeUserFollowerRecord -->
+	<select id="getUserFollow" parameterType="int" resultMap="userFollowMap">
+		select * from t_userFollow where t_userFollow.followId = #{followId}
+	</select>
+
+	<!-- UpdateUserFollowerRecord -->
+	<update id="updateUserFollow" parameterType="userFollow">
+		update t_userFollow set userObj1=#{userObj1.user_name},userObj2=#{userObj2.user_name},followTime=#{followTime} where followId = #{followId}
+	</update>
+
+	<!-- DeleteUserFollowerRecord -->
+	<delete id="deleteUserFollow" parameterType="int">
+		delete from t_userFollow where followId=#{followId}
+	</delete>
+
+</mapper>
