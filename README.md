@@ -9,3 +9,4 @@ For more details please read Report.pdf.
 
 Some screenshots of the application have also been uploaded.
 
+I received a grade of A on this project.
