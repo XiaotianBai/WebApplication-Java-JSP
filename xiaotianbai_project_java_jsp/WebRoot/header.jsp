@@ -11,13 +11,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="<%=basePath %>index.jsp" class="navbar-brand">bidding system</a>
+            <a href="<%=basePath %>index.jsp" class="navbar-brand">Auction & Bidding</a>
         </div>
         <!--nav button and logo-->
         <!--navbar-->
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="<%=basePath %>index.jsp">index</a></li>
+                <li><a href="<%=basePath %>index.jsp">Index</a></li>
                 <!--  
                  <li><a href="<%=basePath %>UserInfo/frontlist">userinfo</a></li>
                 <li><a href="<%=basePath %>ItemClass/frontlist">itemclass</a></li>-->
@@ -64,10 +64,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </ul>
             
         </div>
-        <!--导航--> 
+
     </div>
 </nav>
-<!--导航结束--> 
+
 
 
 <div id="loginDialog" class="modal fade" tabindex="-1" role="dialog">

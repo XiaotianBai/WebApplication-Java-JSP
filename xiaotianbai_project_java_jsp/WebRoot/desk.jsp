@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>InfoManage系统 - 桌面</title>
+<title>Info</title>
 <link href="<%=basePath %>css/desk.css" rel="stylesheet" type="text/css"> 
 </head>
 
@@ -17,12 +17,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <tr>
         <td valign="top"> 
          <font color='red' size="4pt"><br/><br/>
-         	欢迎使用本系统<br/><br/>
-			系统开发环境: MyEclipse8.5 + Tomcat6.0 + mysql5.0 <br/><br/>
-			系统采用技术: SpringMVC + Spring + MyBatis   <br/><br/>
-			FrontEnd技术: jquery + easyui框架 <br/><br/> 
+         	Welcome!<br/><br/>
+			Development Environment: MyEclipse2017 + Tomcat8.5 + mysql5.7 <br/><br/>
+			Frameworks: SpringMVC + Spring + MyBatis   <br/><br/>
+			Front-end: jquery + easyui framework <br/><br/> 
 		 </font>
-		 <font color="blue"  size="4pt">本系统开发时间: 2017年7月23日</font>
+		 <font color="blue"  size="4pt">Date: 11/25/2017</font>
 		</td>
       </tr>
     </table>

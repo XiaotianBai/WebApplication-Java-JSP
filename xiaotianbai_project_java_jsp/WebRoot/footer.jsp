@@ -13,6 +13,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<a href="http://www.google.com">Student ID: N16340028</a> |  --> 
 				<span> Xiaotian Bai NetID:xb306 StudentID:N16340028 </span>
             </div>
+            <div class="col-md-12">
+            	<a href="http://www.github.com/XiaotianBai">My GitHub page</a> |
+				<a href="http://www.linkedin.com/in/XiaotianBai">My Linkedin page</a> | 
+				<a href="http://nyu.edu">New York University</a> 
+            </div>
         </div>
     </div>
 </footer>
